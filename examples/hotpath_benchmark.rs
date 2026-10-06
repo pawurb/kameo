@@ -19,7 +19,8 @@ impl Message<u32> for MyActor {
     type Reply = u32;
 
     async fn handle(&mut self, msg: u32, _ctx: &mut Context<Self, Self::Reply>) -> Self::Reply {
-        msg
+        let buf = vec![msg; 16];
+        std::hint::black_box(buf)[0]
     }
 }
 
